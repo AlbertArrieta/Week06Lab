@@ -78,12 +78,23 @@ public class ShoppingListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        String name = request.getParameter("name");
+        String name = request.getParameter("username");
         String action = request.getParameter("action");
         
-        if(action.equals(null)){
-            
+        
+       
+        
+        if(action == null){
+            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
+                .forward(request, response);
         }
+        
+        else if(action.equals("register")){
+             request.setAttribute("displayName", name);
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
+                .forward(request, response);
+        }
+        
 
     }
 
