@@ -36,7 +36,7 @@ public class ShoppingListServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShoppingListServlet</title>");            
+            out.println("<title>Servlet ShoppingListServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShoppingListServlet at " + request.getContextPath() + "</h1>");
@@ -57,8 +57,7 @@ public class ShoppingListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
-                .forward(request, response);
+        magic(request, response);
     }
 
     /**
@@ -72,10 +71,20 @@ public class ShoppingListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        magic(request, response);
+    }
+
+    private void magic(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         HttpSession session = request.getSession();
-            String username = request.getParameter("username");
-        getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
-                .forward(request, response);
+        String name = request.getParameter("name");
+        String action = request.getParameter("action");
+        
+        if(action.equals(null)){
+            
+        }
+
     }
 
     /**

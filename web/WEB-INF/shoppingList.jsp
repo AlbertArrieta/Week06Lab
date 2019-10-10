@@ -12,6 +12,9 @@
         <title>Shopping List</title>
     </head>
     <body>
-        
+        <form method="post">
+        <h1>Shopping List</h1>
+        Hello, ${username}  <a href="shoppingList?action=logout">Logout</a>
+        </form>
     </body>
 </html>
