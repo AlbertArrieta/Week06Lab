@@ -87,7 +87,6 @@ public class ShoppingListServlet extends HttpServlet {
             itemList = new ArrayList();
         }
 
-
         if (action == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
                     .forward(request, response);
@@ -98,9 +97,9 @@ public class ShoppingListServlet extends HttpServlet {
 
         } else if (action.equals("logout")) {
             session.invalidate();
-
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
                     .forward(request, response);
+            
         } else if (action.equals("add")) {
             String item = request.getParameter("item");
 
