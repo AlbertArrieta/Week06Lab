@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -80,21 +81,36 @@ public class ShoppingListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String name = request.getParameter("username");
         String action = request.getParameter("action");
-        
-        
-       
-        
-        if(action == null){
+
+        ArrayList<String> itemList = (ArrayList<String>) session.getAttribute("list");
+        if (itemList == null) {
+            itemList = new ArrayList();
+        }
+
+        String stringList = null;
+
+        if (action == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
-                .forward(request, response);
-        }
-        
-        else if(action.equals("register")){
-             request.setAttribute("displayName", name);
+                    .forward(request, response);
+        } else if (action.equals("register")) {
+            session.setAttribute("displayName", name);
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
-                .forward(request, response);
+                    .forward(request, response);
+        } else if (action.equals("add")) {
+            String item = request.getParameter("item");
+            itemList.add(item);
+
+            session.setAttribute("list", itemList);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
+                    .forward(request, response);
+        } else if (action.equals("delete")) {
+            String radio = request.getParameter("radiobtn");
+            
+            
+            itemList.remove(radio);
+            session.setAttribute("list", itemList);
         }
-        
 
     }
 
