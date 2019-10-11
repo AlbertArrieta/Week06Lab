@@ -87,7 +87,6 @@ public class ShoppingListServlet extends HttpServlet {
             itemList = new ArrayList();
         }
 
-        String stringList = null;
 
         if (action == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
@@ -96,20 +95,30 @@ public class ShoppingListServlet extends HttpServlet {
             session.setAttribute("displayName", name);
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
                     .forward(request, response);
+
+        } else if (action.equals("logout")) {
+            session.invalidate();
+
+            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
+                    .forward(request, response);
         } else if (action.equals("add")) {
             String item = request.getParameter("item");
+
             itemList.add(item);
 
             session.setAttribute("list", itemList);
 
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
                     .forward(request, response);
+
         } else if (action.equals("delete")) {
-            String radio = request.getParameter("radiobtn");
-            
-            
+            String radio = request.getParameter("deletebtn");
+
             itemList.remove(radio);
             session.setAttribute("list", itemList);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
+                    .forward(request, response);
         }
 
     }
