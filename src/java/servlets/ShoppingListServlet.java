@@ -97,8 +97,7 @@ public class ShoppingListServlet extends HttpServlet {
 
         } else if (action.equals("logout")) {
             session.invalidate();
-            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
-                    .forward(request, response);
+            response.sendRedirect("register");
             
         } else if (action.equals("add")) {
             String item = request.getParameter("item");
