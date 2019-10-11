@@ -28,8 +28,8 @@
                 ${item} <br>
             </c:forEach>
 
-                <input type="submit" name="delete" value="Delete">
-                <input type="hidden" name="action" value="delete">
+            <input type="submit" name="delete" value="Delete">
+            <input type="hidden" name="action" value="delete">
         </form>
 
     </body>

@@ -74,19 +74,19 @@ public class ShoppingListServlet extends HttpServlet {
             throws ServletException, IOException {
         magic(request, response);
     }
-
+    
     private void magic(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         HttpSession session = request.getSession();
         String name = request.getParameter("username");
         String action = request.getParameter("action");
-
+        
         ArrayList<String> itemList = (ArrayList<String>) session.getAttribute("list");
         if (itemList == null) {
             itemList = new ArrayList();
         }
-
+        
         if (action == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp")
                     .forward(request, response);
@@ -94,31 +94,31 @@ public class ShoppingListServlet extends HttpServlet {
             session.setAttribute("displayName", name);
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
                     .forward(request, response);
-
+            
         } else if (action.equals("logout")) {
             session.invalidate();
             response.sendRedirect("register");
             
         } else if (action.equals("add")) {
             String item = request.getParameter("item");
-
+            
             itemList.add(item);
-
+            
             session.setAttribute("list", itemList);
-
+            
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
                     .forward(request, response);
-
+            
         } else if (action.equals("delete")) {
             String radio = request.getParameter("deletebtn");
-
+            
             itemList.remove(radio);
             session.setAttribute("list", itemList);
-
+            
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
                     .forward(request, response);
         }
-
+        
     }
 
     /**
